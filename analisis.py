@@ -69,9 +69,11 @@ def heat_plot(df, column1, column2):
 # heat_plot(df, df.columns[3], df.columns[4])
 
 # heat_plot(contingency_table, df.columns[3], df.columns[4])
-for i in range(2, 15):
-    for j in range(2, 15):
-        contingency_table = contingency_table_analysis(df, df.columns[i], df.columns[j])
-        p = solo_p(contingency_table)
-        if p < 0.05:
-            print(i,j)
+
+# Encontrar a los significativos:
+# for i in range(2, 15):
+#     for j in range(2, 15):
+#         contingency_table = contingency_table_analysis(df, df.columns[i], df.columns[j])
+#         p = solo_p(contingency_table)
+#         if p < 0.05:
+#             print(i,j)
