@@ -40,22 +40,38 @@ def print_contingency_table(contingency_table):
     print(f"Chi-cuadrado: {chi2}")
     print(f"p-valor: {p}")
     print(f"Grados de libertad: {dof}")
+    return(p)
+
+def solo_p(contingency_table):
+    chi2, p, dof, expected = stats.chi2_contingency(contingency_table)
+    return p
 
 
 
-# contingency_table = contingency_table_analysis(df, df.columns[2], df.columns[3])
 
-def heat_plot(ct_table):
+# p = print_contingency_table(contingency_table)
+
+def heat_plot(df, column1, column2):
+
+    contingency_table = contingency_table_analysis(df, column1, column2)
     # Luego, crea el mapa de calor con seaborn
     plt.figure(figsize=(10, 7))
-    sns.heatmap(ct_table, annot=True, fmt="d", cmap="YlGnBu")
+    sns.heatmap(contingency_table, annot=True, fmt="d", cmap="YlGnBu")
 
 
     # Configura los títulos de los ejes con wrap
-    plt.xlabel('\n'.join(textwrap.wrap(df.columns[3], 50)))
-    plt.ylabel('\n'.join(textwrap.wrap(df.columns[2], 50)))
+    plt.xlabel('\n'.join(textwrap.wrap(column1, 50)))
+    plt.ylabel('\n'.join(textwrap.wrap(column2, 50)))
 
     # Muestra el gráfico
     plt.show()
 
-# heat_plot(contingency_table)
+# heat_plot(df, df.columns[3], df.columns[4])
+
+# heat_plot(contingency_table, df.columns[3], df.columns[4])
+for i in range(2, 15):
+    for j in range(2, 15):
+        contingency_table = contingency_table_analysis(df, df.columns[i], df.columns[j])
+        p = solo_p(contingency_table)
+        if p < 0.05:
+            print(i,j)
